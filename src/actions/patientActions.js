@@ -14,6 +14,7 @@ export const listPatients = () => async (dispatch) => {
     dispatch({ type: PATIENT_LIST_REQUEST })
 
     const { data } = await axios.get('/api/patients')
+    console.log(data)
 
     dispatch({
       type: PATIENT_LIST_SUCCESS,

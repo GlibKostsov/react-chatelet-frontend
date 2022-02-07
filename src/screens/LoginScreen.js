@@ -29,7 +29,7 @@ const LoginScreen = () => {
   //react router hooks
   const location = useLocation()
   const navigate = useNavigate()
-  //redirection link
+  //redirection link to go if physician in signed in
   const redirect = location.search ? location.search.split('=')[1] : '/'
 
   //inline styles
@@ -47,7 +47,7 @@ const LoginScreen = () => {
   }
   const btnStyle = { margin: '36px 0 24px  0' }
 
-  //executes before every render / if physician logged in redirects
+  //executes before every render / if physician already logged in redirects
   useEffect(() => {
     if (physicianInfo) {
       navigate(redirect)

@@ -4,9 +4,10 @@ function HomeScreen() {
   const imgStyle = {
     position: 'relative',
     maxWidth: '100%',
-    maxHeight: '100%',
+    maxHeight: '800px',
     marginTop: '-60%',
     marginLeft: '-50%',
+    overflow: 'hidden',
   }
   const containerStyle = {
     position: 'absolute',

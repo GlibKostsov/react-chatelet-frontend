@@ -22,7 +22,7 @@ export const patientListReducer = (state = { patients: [] }, action) => {
 }
 
 //reducer for an individual patient
-export const patientDetailsReducer = (state = { patient: {} }, action) => {
+export const patientDetailsReducer = (state = {}, action) => {
   switch (action.type) {
     case PATIENT_DETAILS_REQUEST:
       return { loading: true, ...state }

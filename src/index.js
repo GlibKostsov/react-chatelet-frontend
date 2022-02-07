@@ -15,6 +15,9 @@ const theme = createTheme({
     primary: {
       main: '#257abd',
     },
+    action: {
+      hover: '#7DB7E5',
+    },
   },
 })
 
