@@ -35,6 +35,12 @@ function PatientDetailsScreen() {
   const theme = useTheme()
   //route navigator
   const navigate = useNavigate()
+
+  //gets physician info from state
+  const physicianLogin = useSelector((state) => state.physicianLogin)
+  //contains: _id,name,email,isAdmin,token
+  const { physicianInfo } = physicianLogin
+
   //gets data from state
   const patientDetails = useSelector((state) => state.patientDetails)
   //loading: if request is loading data
@@ -50,8 +56,12 @@ function PatientDetailsScreen() {
 
   //runs after the render of component is complete
   useEffect(() => {
-    dispatch(patientDetailsAction(patientId))
-  }, [dispatch, patientId])
+    if (!physicianInfo) {
+      navigate('/login', { replace: true })
+    } else {
+      dispatch(patientDetailsAction(patientId))
+    }
+  }, [dispatch, navigate, patientId, physicianInfo])
 
   return (
     <Box mt={12}>

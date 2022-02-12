@@ -3,6 +3,7 @@ import {
   PHYSICIAN_LOGIN_FAIL,
   PHYSICIAN_LOGIN_REQUEST,
   PHYSICIAN_LOGIN_SUCCESS,
+  PHYSICIAN_LOGOUT,
 } from '../constants/physicianConstants'
 
 export const login = (email, password) => async (dispatch) => {
@@ -42,4 +43,9 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     })
   }
+}
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('physicianInfo')
+  dispatch({ type: PHYSICIAN_LOGOUT })
 }

@@ -8,7 +8,10 @@ export default function FormContainer({ children }) {
       direction='column'
       alignItems='center'
       justifyContent='center'
-      style={{ minHeight: '100vh' }}
+      style={{
+        minHeight: '100vh',
+        transform: 'translateY(-20%) ',
+      }}
     >
       <Grid item xs={8}>
         {children}

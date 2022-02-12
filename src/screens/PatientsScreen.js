@@ -65,6 +65,11 @@ function PatientsScreen() {
   //pages react-router locator
   const location = useLocation()
 
+  //gets physician info from state
+  const physicianLogin = useSelector((state) => state.physicianLogin)
+  //contains: _id,name,email,isAdmin,token
+  const { physicianInfo } = physicianLogin
+
   //gets patient list from the state
   const patientList = useSelector((state) => state.patientList)
   //loading: if request is loading data
@@ -74,12 +79,16 @@ function PatientsScreen() {
 
   //dispatches action before component renders
   useEffect(() => {
-    dispatch(listPatients())
-  }, [dispatch])
+    if (!physicianInfo) {
+      navigate('/login', { replace: true })
+    } else {
+      dispatch(listPatients())
+    }
+  }, [dispatch, navigate, physicianInfo])
 
   //handlink user click on table row
-  const handleRowClick = (userId) => {
-    navigate(`${location.pathname}/${userId}`)
+  const handleRowClick = (patientId) => {
+    navigate(`${location.pathname}/${patientId}`)
   }
 
   return (
