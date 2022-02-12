@@ -24,7 +24,7 @@ import { styled } from '@mui/material/styles'
 import moment from 'moment'
 
 //action to get patient list
-import { listPatients } from '../actions/patientActions'
+import { patientListAction } from '../actions/patientActions'
 //custom message component
 import Message from '../components/Message'
 //custom loader component
@@ -79,10 +79,10 @@ function PatientsScreen() {
 
   //dispatches action before component renders
   useEffect(() => {
-    if (!physicianInfo) {
-      navigate('/login', { replace: true })
+    if (physicianInfo && physicianInfo.isAdmin) {
+      dispatch(patientListAction())
     } else {
-      dispatch(listPatients())
+      navigate('/login', { replace: true })
     }
   }, [dispatch, navigate, physicianInfo])
 

@@ -1,5 +1,9 @@
 import axios from 'axios'
 import {
+  PATIENT_DETAILS_RESET,
+  PATIENT_LIST_RESET,
+} from '../constants/patientConstants'
+import {
   PHYSICIAN_LOGIN_FAIL,
   PHYSICIAN_LOGIN_REQUEST,
   PHYSICIAN_LOGIN_SUCCESS,
@@ -48,4 +52,6 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem('physicianInfo')
   dispatch({ type: PHYSICIAN_LOGOUT })
+  dispatch({ type: PATIENT_DETAILS_RESET })
+  dispatch({ type: PATIENT_LIST_RESET })
 }

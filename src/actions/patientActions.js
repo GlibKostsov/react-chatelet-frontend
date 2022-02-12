@@ -9,19 +9,31 @@ import {
 } from '../constants/patientConstants'
 
 //action for a list of patients
-export const listPatients = () => async (dispatch) => {
+export const patientListAction = () => async (dispatch, getState) => {
   try {
+    //sets loading global State var to true
     dispatch({ type: PATIENT_LIST_REQUEST })
 
-    const { data } = await axios.get('/api/patients')
-    console.log(data)
-
+    //gets login info from current physician global State
+    const {
+      physicianLogin: { physicianInfo },
+    } = getState()
+    //adds token to header
+    const config = {
+      headers: {
+        Authorization: `Bearer ${physicianInfo.token}`,
+      },
+    }
+    //gets patients list from backend endpoint
+    const { data } = await axios.get('/api/patients', config)
     dispatch({
+      //if success sends patients data to global State
       type: PATIENT_LIST_SUCCESS,
       payload: data,
     })
   } catch (error) {
     dispatch({
+      //if failure sends error info data to global State
       type: PATIENT_LIST_FAIL,
       payload:
         error.response && error.response.data.message
@@ -32,11 +44,21 @@ export const listPatients = () => async (dispatch) => {
 }
 
 //action for an individual patient
-export const patientDetailsAction = (id) => async (dispatch) => {
+export const patientDetailsAction = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: PATIENT_DETAILS_REQUEST })
 
-    const { data } = await axios.get(`/api/patients/${id}`)
+    const {
+      physicianLogin: { physicianInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${physicianInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/patients/${id}`, config)
 
     dispatch({
       type: PATIENT_DETAILS_SUCCESS,
