@@ -15,6 +15,7 @@ import {
   Box,
   Grid,
   Typography,
+  Button,
 } from '@mui/material'
 
 //material ui styling
@@ -151,6 +152,9 @@ function PatientsScreen() {
               </TableBody>
             </Table>
           </TableContainer>
+          <Grid mt={2}>
+            <Button onClick={() => navigate(-1)}>Retour</Button>
+          </Grid>
         </>
       )}
     </Box>

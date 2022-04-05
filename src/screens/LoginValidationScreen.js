@@ -18,6 +18,7 @@ const LoginScreen = () => {
     padding: '20px',
     maxWidth: '400px',
     position: 'relative',
+    width: '500px',
   }
   const avatarStyle = {
     backgroundColor: '#257abd',

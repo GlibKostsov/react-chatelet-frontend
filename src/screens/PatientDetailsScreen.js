@@ -63,6 +63,12 @@ function PatientDetailsScreen() {
     }
   }, [dispatch, navigate, patientId, physicianInfo])
 
+  const styleInfo = {
+    color: 'white',
+    fontWeight: 'medium',
+    fontSize: '24px',
+  }
+
   return (
     <Box mt={12}>
       {loading ? (
@@ -85,13 +91,27 @@ function PatientDetailsScreen() {
                 maxWidth: '800px',
               }}
             >
-              <Grid sx={{ backgroundColor: 'rgb(37, 122, 189)' }}>
+              <Grid
+                sx={{
+                  backgroundColor: 'rgb(37, 122, 189)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <Avatar
                   variant='square'
                   alt='Remy Sharp'
                   src={patient.picture.medium}
-                  sx={{ width: 100, height: 100, padding: '20px' }}
+                  sx={{ width: 100, height: 100, p: 3 }}
                 />
+                <Box sx={{ display: 'flex', px: 6, pt: 3 }}>
+                  <Typography style={styleInfo}>
+                    {patient.name.first}
+                  </Typography>
+                  <Typography style={styleInfo} sx={{ ml: 2 }}>
+                    {patient.name.last}
+                  </Typography>
+                </Box>
               </Grid>
               <Divider />
 
@@ -106,31 +126,36 @@ function PatientDetailsScreen() {
                     }}
                   >
                     <ListItem>
-                      <ListItemText secondary='Nom:' />
                       <ListItemText
-                        primary={patient.name.first}
-                        sx={{ textAlign: 'end' }}
+                        secondary={patient.registered.age}
+                        primary='Âge:'
                       />
                     </ListItem>
                     <ListItem>
-                      <ListItemText secondary='Prénom:' />
+                      <ListItemText primary='Sex:' secondary={patient.gender} />
+                    </ListItem>
+                  </List>
+                </Grid>
+
+                <Grid item xs={4}>
+                  <List
+                    sx={{
+                      width: '100%',
+                      maxWidth: 360,
+                      minWidth: 200,
+                      bgcolor: 'background.paper',
+                    }}
+                  >
+                    <ListItem>
                       <ListItemText
-                        primary={patient.name.last}
-                        sx={{ textAlign: 'end' }}
+                        primary='Ville:'
+                        secondary={patient.location.city}
                       />
                     </ListItem>
                     <ListItem>
-                      <ListItemText secondary='Âge:' />
                       <ListItemText
-                        primary={patient.registered.age}
-                        sx={{ textAlign: 'end' }}
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText secondary='Sex:' />
-                      <ListItemText
-                        primary={patient.gender}
-                        sx={{ textAlign: 'end' }}
+                        primary='CP:'
+                        secondary={patient.location.postcode}
                       />
                     </ListItem>
                   </List>
@@ -146,50 +171,21 @@ function PatientDetailsScreen() {
                     }}
                   >
                     <ListItem>
-                      <ListItemText secondary='Ville:' />
                       <ListItemText
-                        primary={patient.location.city}
-                        sx={{ textAlign: 'end' }}
+                        primary='Rue #:'
+                        secondary={patient.location.street.number}
                       />
                     </ListItem>
                     <ListItem>
-                      <ListItemText secondary='CP:' />
                       <ListItemText
-                        primary={patient.location.postcode}
-                        sx={{ textAlign: 'end' }}
+                        primary='Rue nom:'
+                        secondary={patient.location.street.name}
                       />
                     </ListItem>
                     <ListItem>
-                      <ListItemText secondary='Pays:' />
                       <ListItemText
-                        primary={patient.location.country}
-                        sx={{ textAlign: 'end' }}
-                      />
-                    </ListItem>
-                  </List>
-                </Grid>
-
-                <Grid item xs={4}>
-                  <List
-                    sx={{
-                      width: '100%',
-                      maxWidth: 360,
-                      minWidth: 200,
-                      bgcolor: 'background.paper',
-                    }}
-                  >
-                    <ListItem>
-                      <ListItemText secondary='Rue #:' />
-                      <ListItemText
-                        primary={patient.location.street.number}
-                        sx={{ textAlign: 'end' }}
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText secondary='Rue nom:' />
-                      <ListItemText
-                        primary={patient.location.street.name}
-                        sx={{ textAlign: 'end' }}
+                        primary='Pays:'
+                        secondary={patient.location.country}
                       />
                     </ListItem>
                   </List>

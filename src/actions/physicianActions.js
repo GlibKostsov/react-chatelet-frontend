@@ -31,6 +31,9 @@ export const login = (email, password) => async (dispatch) => {
     //login request received data
     const { data } = await axios.post('/api/physicians/login', body, config)
 
+    console.log('Physician data:')
+    console.log(data)
+
     dispatch({
       type: PHYSICIAN_LOGIN_SUCCESS,
       payload: data,

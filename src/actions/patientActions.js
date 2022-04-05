@@ -26,6 +26,8 @@ export const patientListAction = () => async (dispatch, getState) => {
     }
     //gets patients list from backend endpoint
     const { data } = await axios.get('/api/patients', config)
+    console.log('Patients list data:')
+    console.log(data)
     dispatch({
       //if success sends patients data to global State
       type: PATIENT_LIST_SUCCESS,
@@ -59,6 +61,8 @@ export const patientDetailsAction = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(`/api/patients/${id}`, config)
+    console.log('Patients details data:')
+    console.log(data)
 
     dispatch({
       type: PATIENT_DETAILS_SUCCESS,
